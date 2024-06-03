@@ -1,4 +1,4 @@
-<h1>Problemática</h1></br>
+# :brain: Problemática</h1>
 
 <p> Se desea realizar un sistema informático que permita manejar la información relacionada con la operativa de una aerolínea.
 La empresa cuenta con una flota de aviones, los cuales son identificados por un número. De cada avión interesa registrar su marca, modelo y la cantidad de asientos disponibles.
@@ -12,6 +12,4 @@ Cada vuelo está compuesto por tramos, y cada tramo posee un número que lo iden
 
 A modo de ejemplo, el vuelo Nº 757, está compuesto de tres tramos: el primero desde Montevideo a Miami, el segundo de Miami a Londres y el tercero de Londres a Milán. 
 A los tramos se les puede aplicar diferentes tarifas. Cada tarifa se identifica por su nombre y posee una descripción. Ejemplos de nombres de tarifas son: Económica, Primera Clase, Tarifa Web, Tarifa Joven, etc.
-
-
 </p>
