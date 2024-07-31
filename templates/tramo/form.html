@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="container py-4">
+                        <div class="container bg-dark">
+                            <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                            <div class="card-body">
+                                <center>
+                                    <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                    <h3>Formulario de <u>Tramo</u>.</h3>
+                                </center>
+
+                                <form id="Formulario" th:action="@{/tramo/form}" th:object="${tramo}" method="post"></br>
+                                    <input type="hidden" th:field="*{idTramo}">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group row py-1">
+                                                <label for="Distancia" class="col-sm-4 col-form-label"><strong>Distancia:</strong></label>
+                                                <div class="col-sm-4">
+                                                    <input required class="form-control" type="text" id="Distancia" th:field="*{distancia}"  placeholder="Km..">
+                                                </div>
+                                                <div th:if="${#fields.hasErrors('distancia')}" th:errors="*{distancia}"></div>
+                                            </div>
+
+                                            <div class="form-group row py-1">
+                                                <label for="Duracion" class="col-sm-4 col-form-label"><strong>Duracion:</strong></label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="Duracion" th:field="*{duracion}" required placeholder="en horas..">
+                                                </div>
+                                                <div th:if="${#fields.hasErrors('duracion')}" th:errors="*{duracion}"></div>
+                                            </div>
+
+                                            <div class="form-group row py-1">
+                                                <label for="HoraSalida" class="col-sm-4 col-form-label"><strong>Salida:</strong></label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="HoraSalida" th:field="*{horaSalida}" required placeholder="Hora..">
+                                                </div>
+                                                <div th:if="${#fields.hasErrors('horaSalida')}" th:errors="*{horaSalida}"></div>
+                                            </div>
+
+                                            <div class="form-group row py-1">
+                                                <label for="HoraLlegada" class="col-sm-4 col-form-label"><strong>Llegada:</strong></label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" id="HoraLlegada" th:field="*{horaLlegada}" required placeholder="Hora..">
+                                                </div>
+                                                <div th:if="${#fields.hasErrors('horaLlegada')}" th:errors="*{horaLlegada}"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- SEGUNDA COLUMNA-->
+                                        <div class="col-md-5">
+                                                    <div class="form-group row py-2">
+                                                        <label for="Vuelo" class="col-sm-5 col-form-label"><strong>Vuelo:</strong></label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control" type="text" id="Vuelo" th:field="*{vuelo}">
+                                                                <th:block th:each="vuelo:${vueloLista}">
+                                                                    <option th:text="${vuelo.idVuelo}" th:value="${vuelo.idVuelo}"></option>
+                                                                </th:block>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row py-1">
+                                                         <label for="aereopuertoSalida" class="col-sm-5 col-form-label"><strong>Salida de:</strong></label>
+                                                         <div class="col-sm-7">
+                                                            <select class="form-control" type="text" id="aereopuertoSalida" th:field="*{salida}">
+                                                                 <th:block th:each="aereopuerto:${aereopuertoLista}">
+                                                                     <option th:text="${aereopuerto.nombre} + ' - ' + ${aereopuerto.ciudad}" th:value="${aereopuerto.id}"></option>
+                                                                 </th:block>
+                                                             </select>
+                                                         </div>
+                                                     </div>
+
+                                                    <div class="form-group row py-1">
+                                                        <label for="aereopuertoLlegada" class="col-sm-5 col-form-label"><strong>Llegada de:</strong></label>
+                                                        <div class="col-sm-7">
+                                                            <select class="form-control" type="text" id="aereopuertoLlegada" th:field="*{llegada}">
+                                                                <th:block th:each="aereopuerto:${aereopuertoLista}">
+                                                                    <option th:text="${aereopuerto.nombre} + ' - ' + ${aereopuerto.ciudad}" th:value="${aereopuerto.id}"></option>
+                                                                </th:block>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                    </div>
+
+                                    <center>
+                                        <input id="guardar" type="button" value="Guardar" class="btn btn-success"> 
+                                        <a onclick="window.history.back();" class="btn btn-secondary btn-xs">Retroceder</a>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

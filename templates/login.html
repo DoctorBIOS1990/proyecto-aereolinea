@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+
+<header th:replace="layout/layout::header"></header>
+
+</br></br></br>
+
+</br>
+
+    <div class="Login">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="card border-primary text-center bg-dark ">
+                <div class="card-header "><strong>Iniciar sesión</strong></div>
+                <div class="card-body">
+                    <img th:src="@{/images/icon.svg}" style="max-width: 50%;" alt="AereoGesti logo" class="img-fluid" width="200"/>
+                    <h3>Aero<strong>Gesti</strong></h3>
+
+
+                    <form th:action="@{/login}" method="post">
+                        </br>
+
+
+                        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Datos inválidos.</strong>
+                        </div>
+
+                        <div th:if="${param.logout}" class="alert alert-info alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Cerrado correctamente.</strong>
+                    </div>
+
+
+                        <input type="text" class="form-control" name="username" id="username"
+                                placeholder="Usuario" required autofocus/></br>
+                         <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Contraseña" required/></br>
+
+                        <p class="btnBotones">
+                             <input type="submit" class="btn btn-lg btn-primary " value="Autenticarse"/>
+                        </p>
+
+                   </form>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+
+
+</br>
+
+
+<footer th:replace="layout/layout::footer"></footer>
+
+</body>
+</html>
+

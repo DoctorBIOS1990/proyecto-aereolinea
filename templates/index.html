@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+
+<div class="Presentar">
+    <div class="container py-5">
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="card bg-dark" sec:authorize="isAuthenticated()" id="rightDash">
+                    <div class="card-header" ><center><strong>DASHBOARD</strong></center></div>
+                    <div class="card-body">
+                        <div class="jumbotron">
+                        <center>
+                            <p align="center">ESTADISTICAS</p>
+                            <img th:src="@{/images/avion.png}" alt="avion icon" class="img-fluid" width="64"/>
+                            <h4 align="center">Vuelos: <strong th:text="${totalVuelos}"></strong></h4>
+                        </center><hr>
+
+                        <center>
+                            <img th:src="@{/images/pasajero.png}" alt="avion icon" class="img-fluid" width="64"/>
+                            <h4 align="center">Pasajeros: <strong th:text="${totalPasajeros}"></strong></h4>
+                        </center><hr>
+
+                        <center>
+                            <img th:src="@{/images/tarifa.png}" alt="avion icon" class="img-fluid" width="64"/>
+                                <h4 align="center">Tarifas: <strong th:text="${totalTarifas}"></strong></h4>
+                        </center>
+
+                            <table id="Tiempo" class="table">
+                                <thead>
+                                     <tr>
+                                         <th><center>Accedido hoy:</center></th>
+                                     </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Fecha:</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><center><div id="fecha"></div></center></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Hora:</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><center><p id="display-time"></p></center></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card bg-dark">
+                    <div class="card-header"><center><strong>Bienvenido a AereoGesti</strong></center></div>
+                         <div class="card-body">
+                             <div class="jumbotron">
+                                 <center><img th:src="@{/images/icon.svg}" style="max-width: 50%;" alt="AereoGesti logo" class="img-fluid" width="210"/></center>
+                                 <h1 align="center">Aereo<strong>Gesti</strong>.</h1>
+                                 <h2 align="center">Sistema de <strong>Gesti</strong>ón Web de <strong>Aereo</strong>lineas.</h2></br>
+
+                                 <marquee behavior="alternate" scrolldelay="200">
+                                 <h5>¡Comienza hoy, viaja al máximo nivel!</h5>
+                                 </marquee>
+
+                                 <p align="justify">Nuestra plataforma ha sido diseñada pensando en ti, combinando la más avanzada
+                                     tecnología con una interfaz amigable, para que puedas centrarte en lo realmente importante.</p>
+                                 </br>
+
+                                 <center>
+                                     <p sec:authorize="isAuthenticated()">
+                                         <img th:src="@{/images/Avatar.png}" alt="avatar" class="img-fluid" width="64"/>
+                                         <Strong>Usuario Logueado:</Strong>  <span sec:authentication="name"></span></br>
+                                         Mensajes: (<strong>0</strong>)
+                                     </p>
+                                 </center>
+
+                                 <p align="center" class="btnBotones"></br>
+                                     <a sec:authorize="not(isAuthenticated())" class="btn btn-lg btn-primary" th:href="@{/login}" role="button">Iniciar Ahora!</a>
+                                 </p>
+
+                             </div>
+                         </div>
+                     </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="card bg-dark" sec:authorize="isAuthenticated()" id="leftDash">
+                    <div class="card-header" ><center><strong>DASHBOARD</strong></center></div>
+                    <div class="card-body">
+                        <div class="jumbotron">
+                            <center>
+                                <p align="center">ESTADISTICAS</p>
+                                <img th:src="@{/images/avion.png}" alt="avion icon" class="img-fluid" width="64"/>
+                                <h4 align="center">Aviones: <strong th:text="${totalAviones}"></strong></h4>
+                            </center><hr></br>
+
+                            <center>
+                                <img th:src="@{/images/Aereopuerto.png}" alt="avion icon" class="img-fluid" width="64"/>
+                                <h4 align="center">Aereopuerto: <strong th:text="${totalAereopuertos}"></strong></h4>
+                            </center><hr></br>
+
+                            <center>
+                                <img th:src="@{/images/Reserva.png}" alt="avion icon" class="img-fluid" width="64"/>
+                                <h4 align="center">Reservas: <strong th:text="${totalReservas}"></strong></h4>
+                            </center><hr></br>
+                            <center>
+                                <img th:src="@{/images/Tramo.png}" alt="avion icon" class="img-fluid" width="64"/>
+                                <h4 align="center">Tramos: <strong th:text="${totalTramos}"></strong></h4>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout/layout::footer"></footer>
+
+<!---FORMULARIO DE quejas-->
+<section class="contact" id="contact" sec:authorize="not(isAuthenticated())">
+
+    <div class="contact-text">
+        <h2>Contactenos!</h2>
+        <center>
+        <img th:src="@{/images/inbox.png}" alt="inbox" class="img-fluid" width="200"/>
+        <h2>Sugerencias y <span>Quejas</span>!</h2>
+        <h4>Gracias por su visita.</h4>
+        <p>Vuelva pronto.</p>
+        </center>
+    </div>
+
+    <div class="contact-form">
+        <form name="datosUsuario" method="POST" action="index.html">
+            <input required id="username" type="text" placeholder=" Jhon Doe" autocomplete="on">
+            <input required id="email" type="text" placeholder="jhondoe@gmail.com" autocomplete="on"></br>
+            <textarea name="" id="comentario" cols="35" rows="10"> Escriba un comentario</textarea>
+            <input type="submit" value="Enviar" class="submit">
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>

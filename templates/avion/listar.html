@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{layout/layout::head}"></head>
+
+<body>
+<header th:replace="~{layout/layout::header}"></header>
+
+</br>
+
+    <div class="Formulario">
+            <div class="container py-4">
+                <div class="card bg-dark">
+                    <strong><div class="card-header" th:text="${titulo}"><img th:src="@{/images/icon.svg}" alt="AereoGesti logo" width="16"/></div></strong>
+                    <div class="card-body">
+                        <center>
+                            <img th:src="@{/images/avion.png}" alt="logo avion" class="img-fluid" width="64"/>
+                            <h3>Nuestros <u>Aviones</u>.</h3>
+                        </center>
+                        <h4 class="card-title">
+                            <a th:href="@{/avion/form}" class="btn btn-success btn-xs" sec:authorize="hasRole('Administrador')">
+                                <img th:src="@{/images/new.png}" alt="logo Agregar" class="img-fluid" width="32"/> Agregar</a>
+                        </h4>
+                        <p sec:authorize="not(hasRole('Administrador'))"><strong>Nota: </strong>Se ha desactivado la edición.</p>
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Asientos</th>
+                                <th>Situado en Aereopuerto</th>
+                                <th sec:authorize="hasRole('Administrador')"><center>OPCIONES</center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="avion: ${avion}">
+                                <td th:text="${avion.idAvion}"></td>
+                                <td th:text="${avion.marca}"></td>
+                                <td th:text="${avion.modelo}"></td>
+                                <td th:text="${avion.asientos}"></td>
+                                <td th:text="${avion.aereopuerto.nombre}"></td>
+
+                                <td>
+                                <center sec:authorize="hasRole('Administrador')">
+                                    <a th:href="@{/avion/form/{id}(id=${avion.idAvion})}" class="btn btn-primary btn-xs">Editar</a>  
+                                    <a onclick="return confirm ('¿Estas seguro que deseas eliminar el registro?');" th:href="@{/avion/eliminar/{id}(id=${avion.idAvion})}" class="btn btn-danger btn-xs">Eliminar</a>
+                                </center>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+<footer th:replace="~{layout/layout::footer}"></footer>
+</body>
+</html>

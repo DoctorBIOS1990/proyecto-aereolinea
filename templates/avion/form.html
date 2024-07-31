@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="container py-4">
+                        <div class="container bg-dark">
+                            <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                            <div class="card-body">
+                                <center>
+                                    <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                    <h3>Formulario de <u>Avión</u>.</h3>
+                                </center>
+
+                                <form th:action="@{/avion/form}" th:object="${avion}"method="post"></br>
+                                    <input type="hidden" th:field="*{idAvion}">
+
+                                   <div class="form-group row py-1">
+                                        <label for="marca" class="col-sm-2 col-form-label"><strong>Marca:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="marca" th:field="*{marca}" required placeholder="Fabricante..">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="modelo" class="col-sm-2 col-form-label"><strong>Ciudad:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="modelo" th:field="*{modelo}" required placeholder="Modelo..">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="Asientos" class="col-sm-2 col-form-label"><strong>Asientos:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="Asientos" th:field="*{asientos}" required placeholder="Disponibilidad..">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('asientos')}" th:errors="*{asientos}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="aereopuertoLugar" class="col-sm-2 col-form-label"><strong>Situado:</strong></label>
+                                        <div class="col-sm-8">
+                                           <select class="form-control" type="text" id="aereopuertoLugar" th:field="*{aereopuerto}">
+                                                <th:block th:each="aereopuerto:${aereopuertoLista}">
+                                                    <option th:text="${aereopuerto.nombre} + ' - ' + ${aereopuerto.ciudad}" th:value="${aereopuerto.id}"></option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <center>
+                                        <input type="submit" value="Guardar" class="btn btn-success"> 
+                                        <a onclick="window.history.back();" class="btn btn-secondary">Retroceder</a>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

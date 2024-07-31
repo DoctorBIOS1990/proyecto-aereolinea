@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="container py-4">
+                        <div class="container bg-dark">
+                            <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                            <div class="card-body">
+                                <center>
+                                    <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                    <h3>Formulario de <u>Pasajero</u>.</h3>
+                                </center>
+
+                                <form th:action="@{/pasajero/form}" th:object="${pasajero}"method="post"></br>
+
+                                    <input type="hidden" th:field="*{dni}">
+
+                                   <div class="form-group row py-1">
+
+                                        <label for="nombre" class="col-sm-2 col-form-label"><strong>Nombre:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="nombre" th:field="*{nombre}" required placeholder="Conocido por..">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="Apellido1" class="col-sm-2 col-form-label"><strong>Primer Apellido:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="Apellido1" th:field="*{apellido1}" required placeholder="Ingrese su Apellido">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="Apellido2" class="col-sm-2 col-form-label"><strong>Segundo Apellido:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="Apellido2" th:field="*{apellido2}" required placeholder="Ingrese su Apellido">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="telefono" class="col-sm-2 col-form-label"><strong>Telefono:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="telefono" th:field="*{telefono}" placeholder="teléfono (Opcional)">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="direccion" class="col-sm-2 col-form-label"><strong>Direccion:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="direccion" th:field="*{direccion}" placeholder="Calle 7 entre A y B">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+                                    </div>
+
+                                    <center>
+                                        <input type="submit" value="Guardar" class="btn btn-success"> 
+                                        <a onclick="window.history.back();" class="btn btn-secondary">Retroceder</a>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{layout/layout::head}"></head>
+
+<body>
+<header th:replace="~{layout/layout::header}"></header>
+
+</br>
+
+    <div class="Formulario">
+            <div class="container py-4">
+                <div class="card bg-dark">
+                    <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                    <div class="card-body">
+                        <center>
+                            <img th:src="@{/images/tarifa.png}" alt="logo tarifa" class="img-fluid" width="64"/>
+                            <h3> Nuestras <u>Tarifas</u>.</h3>
+                        </center>
+                        <h4 class="card-title">
+                            <a th:href="@{/tarifa/form}" class="btn btn-success btn-xs" sec:authorize="hasRole('Administrador')">
+                                <img th:src="@{/images/new.png}" alt="logo Agregar" class="img-fluid" width="32"/> Agregar</a>
+                        </h4>
+                        <p sec:authorize="not(hasRole('Administrador'))"><strong>Nota: </strong>Se ha desactivado la edición.</p>
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Descuento</th>
+                                <th sec:authorize="hasRole('Administrador')"><center>OPCIONES</center>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tarifa: ${tarifa}">
+                                <td th:text="${tarifa.idTarifa}"></td>
+                                <td th:text="${tarifa.nombre}"></td>
+                                <td th:text="${tarifa.descripcion}"></td>
+                                <td th:text="'$ '+${tarifa.descuento}"></td>
+                                <td>
+                                <center sec:authorize="hasRole('Administrador')">
+                                    <a th:href="@{/tarifa/form/{id}(id=${tarifa.idTarifa})}" class="btn btn-primary btn-xs">Editar</a>  
+                                    <a onclick="return confirm ('¿Estas seguro que deseas eliminar el registro?');" th:href="@{/tarifa/eliminar/{id}(id=${tarifa.idTarifa})}" class="btn btn-danger btn-xs">Eliminar</a>
+                                </center>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+<footer th:replace="~{layout/layout::footer}"></footer>
+
+</body>
+</html>

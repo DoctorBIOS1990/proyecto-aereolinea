@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario" >
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="container py-4">
+                        <div class="container bg-dark">
+                            <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                            <div class="card-body">
+                                <center>
+                                    <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                    <h3>Formulario de <u>Vuelo</u>.</h3>
+                                </center>
+
+                                <form id="Formulario" th:action="@{/vuelo/form}" th:object="${vuelo}" method="post"></br>
+                                    <input type="hidden" th:field="*{idVuelo}">
+
+                                    <div class="form-group row py-1">
+                                         <label for="fecha" class="col-sm-4 col-form-label"><strong>Fecha:</strong></label>
+                                         <div class="col-sm-6">
+                                             <input class="form-control" type="date" id="fecha" th:field="*{fecha}" required >
+                                         </div>
+                                         <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
+                                     </div>
+
+                                     <div class="form-group row py-1">
+                                         <label for="aereopuertoSalida" class="col-sm-4 col-form-label"><strong>Salida de:</strong></label>
+                                         <div class="col-sm-6">
+                                            <select class="form-control" type="text" id="aereopuertoSalida" th:field="*{salida}">
+                                                 <th:block th:each="aereopuerto:${aereopuertoLista}">
+                                                     <option th:text="${aereopuerto.nombre} + ' - ' + ${aereopuerto.ciudad}" th:value="${aereopuerto.id}"></option>
+                                                 </th:block>
+                                             </select>
+                                         </div>
+                                     </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="aereopuertoLlegada" class="col-sm-4 col-form-label"><strong>Llegada de:</strong></label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" type="text" id="aereopuertoLlegada" th:field="*{llegada}">
+                                                <th:block th:each="aereopuerto:${aereopuertoLista}">
+                                                    <option th:text="${aereopuerto.nombre} + ' - ' + ${aereopuerto.ciudad}" th:value="${aereopuerto.id}"></option>
+                                                </th:block>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <center>
+                                        <input id="guardar" type="button" value="Guardar" class="btn btn-success"> 
+                                        <a onclick="window.history.back();" class="btn btn-secondary btn-xs">Retroceder</a>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

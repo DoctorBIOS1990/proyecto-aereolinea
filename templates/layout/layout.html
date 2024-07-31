@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+
+    <link rel="stylesheet" th:href="@{'../static/datatables/jQueryUI-1.12.1/themes/base/jquery-ui.css'}">
+    <link rel="stylesheet" th:href="@{'../static/datatables/DataTables-1.10.25/css/datatables.jqueryui.css'}">
+    <link rel="stylesheet" th:href="@{'../static/datatables/Buttons-1.7.1/css/buttons.jqueryui.css'}">
+    <link rel="stylesheet" th:href="@{'../static/datatables/SearchPanes-1.3.0/css/searchPanes.jqueryui.css'}">
+
+    <link rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/css/jquery-ui.min.css'}">
+    <link rel="stylesheet" th:href="@{'/css/jquery.dataTables.min.css'}">
+    <link rel="stylesheet" th:href="@{'/css/myCSS.css'}">
+</head>
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <img th:src="@{/images/icon.svg}" style="max-width: 50%;" alt="AereoGesti logo" class="img-fluid" width="24"/>
+
+        <a class="navbar-brand" th:href="@{'/index'}"> Aereo<strong>Gesti</strong></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav mr-auto" sec:authorize="not(isAuthenticated())">
+                <li  class="nav-item active"><a class="nav-link" sec:authorize="not(isAuthenticated())" th:href="@{'/index'}"><Strong>Inicio</strong><span
+                        class="sr-only">(current)</span>
+                </a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/construccion}" sec:authorize="not(isAuthenticated())"> Reserve su viaje <strong>AHORA!</strong></a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">
+                <li>    </li>
+                <li  class="nav-item active"><a class="nav-link" th:href="@{'/index'}"><Strong>Inicio</strong><span
+                        class="sr-only">(current)</span>
+                </a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/reserva/listar}">Reservas</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/avion/listar}">Aviones</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/pasajero/listar}">Pasajeros</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/aereopuerto/listar}">Aereopuertos</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/vuelo/listar}">Vuelos</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/tramo/listar}">Tramos</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/tarifa/listar}">Tarifas</a>
+                </li>
+            </ul>
+
+            <div class="btnBotones">
+            <ul class="navbar-nav navbar-right">
+                <li sec:authorize="!isAuthenticated()">
+                    <a id="btnSesion" class="btn btn-outline-primary " th:href="@{/login}">Iniciar Sesión</a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()" class="dropdown show">
+                    <a class="btn btn-outline-sucess dropdown-toggle" href="#"
+                       role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img sec:authorize="hasRole('Administrador')" th:src="@{/images/icon.svg}" alt="admin" class="img-fluid" width="32"/>
+                        <img sec:authorize="not(hasRole('Administrador'))" th:src="@{/images/avatar.png}" alt="avatar" class="img-fluid" width="32"/>
+                        <span sec:authentication="name"></span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <center>
+                        <img th:src="@{/images/admin.svg}" alt="Admin logo" class="img-fluid" width="130"sec:authorize="hasRole('Administrador')"/>
+                        <img th:src="@{/images/user.png}" alt="User Logo" class="img-fluid" width="130" sec:authorize="not(hasRole('Administrador'))"/>
+                        <strong><span sec:authentication="name"></span></strong>
+                        <a th:href="@{/construccion}" sec:authorize="hasRole('Administrador')" class="dropdown-item">
+                            Crear cuentas.
+                        </a>
+                        <a th:href="@{/construccion}" sec:authorize="hasRole('Administrador')" class="dropdown-item">
+                            Mensajes
+                        </a>
+                    </center>
+                        <form id="logoutForm" th:action="@{/logout}" method="post">
+                         <center>
+                            <button class="dropdown-item"
+                                    onclick="document.getElementById('logoutForm').submit();" type="submit"><img th:src="@{/images/salir.png}" alt="salir" class="img-fluid" width="32"/>Desconectar
+                            </button>
+
+                            <input type="hidden" th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}"/>
+                         </center>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<footer th:fragment="footer" class="footer">
+    <p class="text-center">
+        <strong>
+            &copy; 2024 <strong>AereoGesti by <u>Equipo #3</u></strong>, 4to Ingeniería Informática FITIB
+        </strong>
+    </p>
+        <script th:src="@{'/js/validacion.js'}"></script>
+        <script th:src="@{'/js/scrollreveal.js'}"></script>
+        <script th:src="@{'/js/myJS.js'}"></script>
+        <script th:src="@{'../datatables/pdfmake-0.1.36/pdfmake.js'}"></script>
+        <script th:src="@{'../datatables/pdfmake-0.1.36/vfs_fonts.js'}"></script>
+        <script th:src="@{'/js/jquery-3.4.1.js'}"></script>
+        <script th:src="@{'../datatables/jQueryUI-1.12.1/jquery-ui.js'}"></script>
+        <script th:src="@{'../datatables/DataTables-1.10.25/js/jquery.dataTables.js'}"></script>
+        <script th:src="@{'../datatables/DataTables-1.10.25/js/jquery.jqueryui.js'}"></script>
+        <script th:src="@{'../datatables/Buttons-1.7.1/js/dataTables.buttons.js'}"></script>
+        <script th:src="@{'../datatables/Buttons-1.7.1/js/buttons.jqueryui.js'}"></script>
+        <script th:src="@{'../datatables/Buttons-1.7.1/js/buttons.colVis.js'}"></script>
+        <script th:src="@{'../datatables/Buttons-1.7.1/js/buttons.html5.js'}"></script>
+        <script th:src="@{'../datatables/Buttons-1.7.1/js/buttons.print.js'}"></script>
+        <script th:src="@{'/js/popper.min.js'}"></script>
+        <script th:src="@{'/js/bootstrap.min.js'}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable( {
+
+                dom: 'Bfrtip',
+                buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape', // Configura la orientación de la página a horizontal
+                    pageSize: 'A4', // Tamaño de página A4
+                    title: function() {
+                    // Obtiene el valor de la variable 'titulo' pasada al HTML
+                    return $('strong div.card-header').text().trim();
+                },
+                    customize: function(doc) {
+                    // Configura la tabla para que ocupe el ancho de la página
+                    doc.content[1].table.widths = '*';
+
+                    // Centra el contenido de la tabla
+                    doc.content[1].alignment = 'center';
+
+                    // Centra los datos de la tabla
+                    doc.content[1].table.body.forEach(function(row) {
+                        row.forEach(function(cell) {
+                            cell.alignment = 'center';
+                        });
+                    });
+                },
+                    exportOptions: {
+                            columns: ':not(:last-child)',
+                            format: {
+                                body: function(data){
+                                    var valor = data.toString();
+                                    valor = valor.replace("<br>","\n");
+                                    return valor;
+                                }
+                            }
+                        }
+                }
+
+                ]
+            } );
+        } );
+    </script>
+
+
+</footer>
+
+</body>
+</html>

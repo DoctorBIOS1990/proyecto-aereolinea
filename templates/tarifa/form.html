@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="container py-4">
+                        <div class="container bg-dark">
+                            <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                            <div class="card-body">
+                                <center>
+                                    <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                    <h3>Formulario de <u>Tarifa</u>.</h3>
+                                </center>
+
+                                <form th:action="@{/tarifa/form}" th:object="${tarifa}"method="post"></br>
+                                    <input type="hidden" th:field="*{idTarifa}">
+
+                                   <div class="form-group row py-1">
+                                        <label for="nombre" class="col-sm-2 col-form-label"><strong>Nombre:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="nombre" th:field="*{nombre}" required placeholder="Nombre de la Tarifa..">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="descripcion" class="col-sm-2 col-form-label"><strong>Descripcion:</strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="descripcion" th:field="*{descripcion}" required placeholder="Para quienes va...">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+
+
+                                    </div>
+
+                                    <div class="form-group row py-1">
+                                        <label for="Descuento" class="col-sm-2 col-form-label"><strong>Descuento: </strong></label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" id="Descuento" th:field="*{descuento}" required placeholder="$$$.000">
+                                        </div>
+                                        <div th:if="${#fields.hasErrors('descuento')}" th:errors="*{descuento}"></div>
+                                    </div>
+
+                                    <center>
+                                        <input type="submit" value="Guardar" class="btn btn-success">  
+                                        <a onclick="window.history.back();" class="btn btn-secondary btn-xs">Retroceder</a>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

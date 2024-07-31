@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+<header th:replace="layout/layout::header"></header>
+</br></br></br>
+
+    <div class="Formulario">
+            <div class="row">
+                <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="container py-4">
+                            <div class="container bg-dark">
+                                <strong><div class="card-header" th:text="${titulo}"></div></strong>
+                                <div class="card-body">
+                                    <center>
+                                        <img th:src="@{/images/form.png}" alt="logo pencil" class="img-fluid" width="64"/>
+                                        <h3>Formulario de <u>Reservación</u>.</h3>
+                                    </center>
+
+                                    <form th:action="@{/reserva/form}" th:object="${reserva}" method="post"></br>
+                                        <input type="hidden" th:field="*{idReserva}">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <div class="form-group row py-4">
+                                                    <label for="Fecha" class="col-sm-3 col-form-label"><strong>Fecha:</strong></label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" type="date" id="Fecha" th:field="*{fecha}" required>
+                                                    </div>
+                                                    <div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
+                                                </div>
+
+                                                <div class="form-group row py-4">
+                                                    <label for="Precio" class="col-sm-3 col-form-label"><strong>Precio:</strong></label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" type="text" id="Precio" th:field="*{precio}" required placeholder="$$$.000">
+                                                    </div>
+                                                    <div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!--SEGUNDA COLUMNA-->
+                                            <div class="col-md-5">
+
+                                                        <div class="form-group row py-2">
+                                                            <label for="Pasajero" class="col-sm-3 col-form-label"><strong>Pasajero:</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" type="text" id="Pasajero" th:field="*{dni}">
+                                                                    <th:block th:each="pasajero:${pasajeroLista}">
+                                                                        <option th:text="${pasajero.nombre}+' '+${pasajero.apellido1}+' '+${pasajero.apellido2}" th:value="${pasajero.dni}"></option>
+                                                                    </th:block>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row py-2">
+                                                            <label for="Vuelo" class="col-sm-3 col-form-label"><strong>Vuelo:</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" type="text" id="Vuelo" th:field="*{vuelo}">
+                                                                    <th:block th:each="vuelo:${vueloLista}">
+                                                                        <option th:text="${vuelo.idVuelo}" th:value="${vuelo.idVuelo}"></option>
+                                                                    </th:block>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row py-2">
+                                                            <label for="Tarifa" class="col-sm-3 col-form-label"><strong>Tarifa:</strong></label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" type="text" id="Tarifa" th:field="*{tarifa}">
+                                                                    <th:block th:each="tarifa:${tarifaLista}">
+                                                                        <option th:text="${tarifa.nombre}" th:value="${tarifa.idTarifa}"></option>
+                                                                    </th:block>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row py-1">
+                                            <label for="Tramo" class="col-sm-2 col-form-label"><strong>Tramo:</strong></label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" type="text" id="Tramo" th:field="*{tramo}">
+                                                    <th:block th:each="tramo:${tramoLista}">
+                                                        <option th:text="'Salida de: '+${tramo.salida}+' - '+'LLegada de: '+${tramo.llegada}" th:value="${tramo.idTramo}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <center>
+                                            <input type="submit" value="Guardar" class="btn btn-success"> 
+                                            <a onclick="window.history.back();" class="btn btn-secondary btn-xs">Retroceder</a>
+                                        </center>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+
+<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>
