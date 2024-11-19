@@ -13,3 +13,12 @@ Cada vuelo está compuesto por tramos, y cada tramo posee un número que lo iden
 A modo de ejemplo, el vuelo Nº 757, está compuesto de tres tramos: el primero desde Montevideo a Miami, el segundo de Miami a Londres y el tercero de Londres a Milán. 
 A los tramos se les puede aplicar diferentes tarifas. Cada tarifa se identifica por su nombre y posee una descripción. Ejemplos de nombres de tarifas son: Económica, Primera Clase, Tarifa Web, Tarifa Joven, etc.
 </p>
+
+# 📸 Capturas
+
+<div align="center">
+  <img src="https://github.com/DoctorBIOS1990/proyecto-aereolinea/blob/main/Screenshoot/screenShot1.JPG" width="150"/> 
+  <img src="https://github.com/DoctorBIOS1990/proyecto-aereolinea/blob/main/Screenshoot/screenShot2.JPG" width="150"/> 
+  <img src="https://github.com/DoctorBIOS1990/proyecto-aereolinea/blob/main/Screenshoot/screenShot3.JPG" width="150"/> 
+  <img src="https://github.com/DoctorBIOS1990/proyecto-aereolinea/blob/main/Screenshoot/screenShot4.JPG" width="150"/> 
+</div>
